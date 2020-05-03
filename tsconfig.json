@@ -1,0 +1,17 @@
+{
+    "compilerOptions":{
+        "jsx": "react",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "target": "es5",
+        "outDir": "lib",
+        "declaration": true
+    },
+    "compileOnSave": false,
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
