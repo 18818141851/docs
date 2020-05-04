@@ -1,3 +1,4 @@
+const webpack=require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
@@ -37,6 +38,10 @@ module.exports = {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
     plugins: [
+      new webpack.DllReferencePlugin({
+        context: __dirname,
+        manifest: require('./dll/static-module-manifest.json')
+    }),
       new HtmlWebPackPlugin({
         template: './src/index.html',
         filename: './index.html'

@@ -15,7 +15,7 @@ module.exports={
     },
     plugins: [
     new webpack.DllPlugin({
-        name:"[name]-dll",
+        name:"coding",
         path:path.join(__dirname, './dll','[name]-manifest.json')   
     })
     ]
