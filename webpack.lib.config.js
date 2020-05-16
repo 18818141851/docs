@@ -1,9 +1,9 @@
 const webpack=require('webpack');
 const path=require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports={
-    mode:"production",//development//production
+    mode:"production",//development//production,
     entry:{
         "index":'./src/index'
     },
@@ -15,14 +15,8 @@ module.exports={
               use: 'awesome-typescript-loader'
           },
             {
-              test: /\.(js|jsx)$/,
-              exclude: /node_modules/,
-              use: {
-                loader: 'babel-loader'
-              }
-            },
-            {
               test: /\.html$/,
+              exclude: /^node_modules$/,
               use: [
                 {
                   loader: 'html-loader',
@@ -31,16 +25,32 @@ module.exports={
               ]
             },
             {
-              test: /\.css$/,
-              use: [MiniCssExtractPlugin.loader, 'css-loader']
+                test: /\.less$/,
+                exclude: /^node_modules$/,
+                use: [
+                  "css-loader",
+                    "less-loader"
+                ]
             }
+            // {
+            //   test: /\.(less|css)$/,
+            //   exclude: /^node_modules$/,
+            //   use: [{
+            //     loader: "style-loader" 
+            // },{
+            //     loader: "css-loader" 
+            // },{
+            //     loader: "less-loader"
+            // }]
+            // }
           ]
     },
     output:{
         path: path.join(__dirname, './lib'),
         filename: '[name].js',
         library: 'coding',
-        libraryTarget:'umd'
+        libraryTarget:'umd',
+        umdNamedDefine: true
     },
     plugins: [
     new webpack.DllReferencePlugin({
@@ -69,5 +79,6 @@ module.exports={
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
-      }
+      },
+    externals:[]
 }
